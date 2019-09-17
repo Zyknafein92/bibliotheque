@@ -1,0 +1,22 @@
+package com.bibliotheque.borrowmicroservice.borrow.model;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Data
+@Getter
+@Setter
+
+public class User {
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String email;
+    private String password;
+    private String adress;
+    private String postalCode;
+}

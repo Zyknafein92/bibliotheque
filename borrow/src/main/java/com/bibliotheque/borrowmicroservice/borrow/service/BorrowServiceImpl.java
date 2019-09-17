@@ -1,4 +1,7 @@
 package com.bibliotheque.borrowmicroservice.borrow.service;
 
-public class BorrowServiceImpl {
+import org.springframework.stereotype.Service;
+
+@Service
+public class BorrowServiceImpl implements BorrowService {
 }
