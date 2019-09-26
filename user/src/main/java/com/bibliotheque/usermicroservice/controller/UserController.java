@@ -3,6 +3,7 @@ package com.bibliotheque.usermicroservice.controller;
 
 import com.bibliotheque.usermicroservice.model.User;
 import com.bibliotheque.usermicroservice.service.UserService;
+import com.bibliotheque.usermicroservice.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,23 +20,24 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @GetMapping(value = "/api/user/getUser")
-    public  User getUser(@PathVariable Long id){
-        return userService.getUser(id);
+    @RequestMapping(value = "/api/user/getUser", method = RequestMethod.GET)
+    public  User getUser(@RequestParam(name = "id", defaultValue = "")  String id) {
+        return userService.getUser(Long.valueOf(id));
     }
 
-    @PostMapping(value="/api/user/addUser")
-    public  User createUser(@RequestBody User user){
-        return userService.createUser(user);
+    @RequestMapping(value = "/api/user/addUser", method = RequestMethod.POST)
+    public  User createUser(@RequestBody UserDTO userDTO){
+        return userService.createUser(userDTO);
     }
 
-    @PutMapping(value="/api/user/updateUser")
-    public void updateUser(@RequestBody User user){
-        userService.updateUser(user);
+    @RequestMapping(value = "/api/user/updateUser", method = RequestMethod.PUT)
+    public void updateUser(@RequestBody UserDTO userDTO){
+        userService.updateUser(userDTO);
     }
 
-    @DeleteMapping(value="/api/user/deleteUser")
-    public void deleteUser(@PathVariable Long id){
-        userService.deleteUser(id);
+
+    @RequestMapping(value = "/api/user/deleteUser", method = RequestMethod.DELETE)
+    public void deleteUser(@RequestParam(name = "id", defaultValue = "")  String id) {
+        userService.deleteUser(Long.valueOf(id));
     }
 }

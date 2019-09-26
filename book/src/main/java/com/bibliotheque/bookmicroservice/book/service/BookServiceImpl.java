@@ -27,7 +27,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @ResponseStatus(HttpStatus.FOUND)
     public Book getBook(Long id) {
         Book book = bookRepository.getOne(id);
         if(book == null) throw new BookNotFoundException("Le livre recherché n'a pas été trouvé");
@@ -35,22 +34,19 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @ResponseStatus(HttpStatus.CREATED)
     public Book createBook(BookDTO bookDTO) {
         Book book = bookMapper.bookDtoToBook(bookDTO);
         return bookRepository.save(book);
     }
 
     @Override
-    @ResponseStatus(HttpStatus.ACCEPTED)
     public void updateBook(BookDTO bookDTO) {
-        Book book = bookMapper.bookDtoToBook(bookDTO);
-        book.setId(bookDTO.getId());
+        Book book = getBook(bookDTO.getId());
+        bookMapper.updateBookFromBookDTO(bookDTO,book);
         bookRepository.save(book);
     }
 
     @Override
-    @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteBook(long id) {
         bookRepository.deleteById(id);
     }

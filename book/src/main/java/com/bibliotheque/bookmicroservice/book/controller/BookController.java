@@ -26,7 +26,6 @@ public class BookController {
         return bookService.getBook(Long.valueOf(id));
     }
 
-
     @RequestMapping(value = "/api/book/addBook", method = RequestMethod.POST)
     public Book createBook(@RequestBody BookDTO bookDTO){
         return bookService.createBook(bookDTO);
