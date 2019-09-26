@@ -1,10 +1,11 @@
 package com.bibliotheque.bookmicroservice.book.service;
 
 import com.bibliotheque.bookmicroservice.book.model.Book;
-import com.bibliotheque.bookmicroservice.book.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bibliotheque.bookmicroservice.book.service.dto.BookDTO;
+
 
 import java.util.List;
+
 
 public interface BookService {
 
@@ -12,11 +13,11 @@ public interface BookService {
 
     Book getBook(Long id);
 
-    Book createBook(Book book);
+    Book createBook(BookDTO bookDTO);
 
-    void updateBook(Book book);
+    void updateBook(BookDTO bookDTO);
 
-    void deleteBook(Long id);
+    void deleteBook(long id);
 
 
 }

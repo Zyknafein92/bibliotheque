@@ -3,6 +3,7 @@ package com.bibliotheque.bookmicroservice.book.controller;
 import com.bibliotheque.bookmicroservice.book.model.Book;
 
 import com.bibliotheque.bookmicroservice.book.service.BookService;
+import com.bibliotheque.bookmicroservice.book.service.dto.BookDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,23 +21,24 @@ public class BookController {
         return bookService.getBooks();
     }
 
-    @GetMapping(value = "/api/book/getBook")
-    public  Book getBook(@PathVariable Long id){
-        return bookService.getBook(id);
+    @RequestMapping(value = "/api/book/getBook", method = RequestMethod.GET)
+    public Book getBook(@RequestParam(name = "id", defaultValue = "")  String id){
+        return bookService.getBook(Long.valueOf(id));
     }
 
-    @PostMapping(value="/api/book/addBook")
-    public  Book createBook(@RequestBody Book book){
-        return bookService.createBook(book);
+
+    @RequestMapping(value = "/api/book/addBook", method = RequestMethod.POST)
+    public Book createBook(@RequestBody BookDTO bookDTO){
+        return bookService.createBook(bookDTO);
     }
 
-    @PutMapping(value="/api/book/updateBook")
-    public void updateBook(@RequestBody Book book){
-        bookService.updateBook(book);
+    @RequestMapping(value = "/api/book/updateBook", method = RequestMethod.PUT)
+    public void updateBook(@RequestBody BookDTO bookDTO){
+        bookService.updateBook(bookDTO);
     }
 
-    @DeleteMapping(value="/api/book/deleteBook")
-    public void deleteBook(@PathVariable Long id){
-        bookService.deleteBook(id);
+    @RequestMapping(value = "/api/book/deleteBook", method = RequestMethod.DELETE)
+    public void deleteBook(@RequestParam(name = "id", defaultValue = "")  String id){
+        bookService.deleteBook(Long.valueOf(id));
     }
 }
