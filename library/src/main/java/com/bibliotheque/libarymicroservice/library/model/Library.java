@@ -14,11 +14,8 @@ public class Library {
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name ="user_id")
+    @Column(name ="library_id")
     private Long id;
-
-    //todo : mapping
-    private List<Book> bookList;
 
     @Column(name ="name")
     private String name;
@@ -31,5 +28,15 @@ public class Library {
 
     @Column(name ="phone")
     private String phone;
+
+    public Library() {
+    }
+
+    public Library(String name, String adress, String postalCode, String phone) {
+        this.name = name;
+        this.adress = adress;
+        this.postalCode = postalCode;
+        this.phone = phone;
+    }
 
 }

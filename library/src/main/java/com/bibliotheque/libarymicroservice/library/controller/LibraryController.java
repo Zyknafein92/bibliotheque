@@ -2,6 +2,7 @@ package com.bibliotheque.libarymicroservice.library.controller;
 
 import com.bibliotheque.libarymicroservice.library.model.Library;
 import com.bibliotheque.libarymicroservice.library.service.LibraryService;
+import com.bibliotheque.libarymicroservice.library.service.dto.LibraryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @RestController
 public class LibraryController {
-
+// todo : vérif sur les caractères ect... traitement erreur.
     @Autowired
     private LibraryService libraryService;
 
@@ -18,23 +19,23 @@ public class LibraryController {
         return libraryService.getLibrarys();
     }
 
-    @GetMapping(value = "/api/library/getLibrary")
-    public  Library getLibrary(@PathVariable Long id){
-        return libraryService.getLibrary(id);
+    @RequestMapping(value = "/api/library/getLibrary", method = RequestMethod.GET)
+    public  Library getLibrary(@RequestParam(name = "id", defaultValue = "")  String id){
+        return libraryService.getLibrary(Long.valueOf(id));
     }
 
-    @PostMapping(value="/api/library/addLibrary")
-    public  Library createLibrary(@RequestBody Library library){
-        return libraryService.createLibrary(library);
+    @RequestMapping(value = "/api/library/addLibrary", method = RequestMethod.POST)
+    public  Library createLibrary(@RequestBody LibraryDTO libraryDTO){
+        return libraryService.createLibrary(libraryDTO);
     }
 
-    @PutMapping(value="/api/library/updateLibrary")
-    public void updateLibrary(@RequestBody Library library){
-        libraryService.updateLibrary(library);
+    @RequestMapping(value ="/api/library/updateLibrary", method = RequestMethod.PUT)
+    public void updateLibrary(@RequestBody LibraryDTO libraryDTO){
+        libraryService.updateLibrary(libraryDTO);
     }
 
-    @DeleteMapping(value="/api/library/deleteLibrary")
-    public void deleteLibrary(@PathVariable Long id){
-        libraryService.deleteLibrary(id);
+    @RequestMapping(value = "/api/library/deleteLibrary", method = RequestMethod.DELETE)
+    public void deleteLibrary(@RequestParam(name = "id", defaultValue = "")  String id){
+        libraryService.deleteLibrary(Long.valueOf(id));
     }
 }

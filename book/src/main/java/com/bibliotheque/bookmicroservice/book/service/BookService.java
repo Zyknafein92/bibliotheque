@@ -1,5 +1,6 @@
 package com.bibliotheque.bookmicroservice.book.service;
 
+import com.bibliotheque.bookmicroservice.book.exceptions.BookCreationException;
 import com.bibliotheque.bookmicroservice.book.model.Book;
 import com.bibliotheque.bookmicroservice.book.service.dto.BookDTO;
 
@@ -13,7 +14,7 @@ public interface BookService {
 
     Book getBook(Long id);
 
-    Book createBook(BookDTO bookDTO);
+    Book createBook(BookDTO bookDTO) throws BookCreationException;
 
     void updateBook(BookDTO bookDTO);
 

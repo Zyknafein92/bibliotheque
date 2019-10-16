@@ -16,5 +16,5 @@ public class BookDTO {
     private String gender;
     private String picture;
     private Boolean avaible;
-
+    private String libraryID;
 }

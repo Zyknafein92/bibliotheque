@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
 @Entity
 @Getter
 @Setter
@@ -17,6 +18,7 @@ public class Book {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name ="book_id")
     private Long id;
+
 
     @Column(name="title")
     private String title;
@@ -36,15 +38,20 @@ public class Book {
     @Column(name="avaible")
     private Boolean avaible;
 
-    public Book() {
+    @Column(name="library_ID")
+    private String LibraryID;
+
+    public Book () {
     }
 
-    public Book(String title, String author, String description, String gender, String picture, Boolean avaible) {
+    public Book (String title, String author, String description, String gender, String picture, Boolean avaible, String libraryID) {
         this.title = title;
         this.author = author;
         this.description = description;
         this.gender = gender;
         this.picture = picture;
         this.avaible = avaible;
+        this.LibraryID = libraryID;
     }
+
 }

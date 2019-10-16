@@ -3,6 +3,7 @@ package com.bibliotheque.usermicroservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -17,6 +18,7 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name ="user_id")
     private Long id;
+
 
     @Column(name="firstName")
     private String firstName;
@@ -38,4 +40,17 @@ public class User {
 
     @Column(name="postalCode")
     private String postalCode;
+
+    public User() { }
+
+    public User(Long id, String firstName, String lastName, String phone, String email, String password, String adress, String postalCode) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.adress = adress;
+        this.postalCode = postalCode;
+    }
 }

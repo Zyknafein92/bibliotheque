@@ -1,14 +1,14 @@
 package com.bibliotheque.bookmicroservice.book.service;
 
+import com.bibliotheque.bookmicroservice.book.exceptions.BookCreationException;
 import com.bibliotheque.bookmicroservice.book.exceptions.BookNotFoundException;
 import com.bibliotheque.bookmicroservice.book.model.Book;
 import com.bibliotheque.bookmicroservice.book.repository.BookRepository;
 import com.bibliotheque.bookmicroservice.book.service.dto.BookDTO;
 import com.bibliotheque.bookmicroservice.book.service.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
+
 
 import java.util.List;
 
@@ -35,13 +35,44 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book createBook(BookDTO bookDTO) {
+
+        if(bookDTO.getLibraryID() == null) {
+            throw new BookCreationException("Veuillez renseigner l'ID de la librairie");
+        }
+
+        if(bookDTO.getAvaible() == null) {
+            throw new BookCreationException("Veuillez renseigner la disponibilité du livre");
+        }
+
+        if(bookDTO.getAuthor() == null) {
+            throw new BookCreationException("Veuillez ajouter un nom d'auteur");
+        }
+
+        if(bookDTO.getDescription() == null) {
+            throw new BookCreationException("Veuillez ajouter une description à l'ouvrage");
+        }
+
+        if(bookDTO.getGender() == null) {
+            throw new BookCreationException("Veuillez ajouter un genre à l'ouvrage");
+        }
+
+        if(bookDTO.getPicture() == null) {
+            throw new BookCreationException("Veuillez ajouter une photo de la couverture de l'ouvrage");
+        }
+
+        if(bookDTO.getTitle() == null) {
+            throw new BookCreationException("Veuillez renseigner le titre de l'ouvrage");
+        }
+
         Book book = bookMapper.bookDtoToBook(bookDTO);
+
         return bookRepository.save(book);
     }
 
     @Override
     public void updateBook(BookDTO bookDTO) {
         Book book = getBook(bookDTO.getId());
+        if(book == null) throw new BookNotFoundException("Le livre recherché n'a pas été trouvé");
         bookMapper.updateBookFromBookDTO(bookDTO,book);
         bookRepository.save(book);
     }
