@@ -43,8 +43,7 @@ public class User {
 
     public User() { }
 
-    public User(Long id, String firstName, String lastName, String phone, String email, String password, String adress, String postalCode) {
-        this.id = id;
+    public User( String firstName, String lastName, String phone, String email, String password, String adress, String postalCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;

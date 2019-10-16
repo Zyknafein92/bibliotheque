@@ -18,11 +18,10 @@ public class Borrow {
     private Long id;
 
     @Column(name="user_id")
-    private User user; //todo : Voir avec l'id seulement si ca passe (Alexandre a dit vas-y test !!! xD)
-
+    private String userID; //todo : Voir avec l'id seulement si ca passe (Alexandre a dit vas-y test !!! xD)
 
     @Column(name="book_id")
-    private Book book;
+    private String bookID;
 
     @Column(name="date_start_borrow")
     private Date dateStart;

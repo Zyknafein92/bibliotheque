@@ -1,16 +1,12 @@
 package com.bibliotheque.bookmicroservice.book.controller;
-
-import com.bibliotheque.bookmicroservice.book.exceptions.BookCreationException;
 import com.bibliotheque.bookmicroservice.book.model.Book;
-
 import com.bibliotheque.bookmicroservice.book.service.BookService;
 import com.bibliotheque.bookmicroservice.book.service.dto.BookDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
 
@@ -35,30 +31,20 @@ public class BookController {
     }
 
     @RequestMapping(value = "/api/book/addBook", method = RequestMethod.POST)
-    public ResponseEntity<Void> createBook(@RequestBody BookDTO bookDTO) { // retour en object renvois soit l'erreur
+    public ResponseEntity<Book> createBook(@RequestBody BookDTO bookDTO) { // retour en object renvois soit l'erreur
         Book bookToCreate = bookService.createBook(bookDTO);
-
-        if (bookToCreate == null) {
-            return ResponseEntity.noContent().build();
-        }
-
-        URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(bookToCreate.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
+        if (bookToCreate == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(bookToCreate, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/api/book/updateBook", method = RequestMethod.PUT)
-    public void updateBook(@RequestBody BookDTO bookDTO){
+    @RequestMapping(value = "/api/book/updateBook", method = RequestMethod.PUT) // TODO: Vérifier avec Alexandre
+    public ResponseEntity<Void> updateBook(@RequestBody BookDTO bookDTO){
         bookService.updateBook(bookDTO);
-
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/api/book/deleteBook", method = RequestMethod.DELETE)
-    public void deleteBook(@RequestParam(name = "id", defaultValue = "")  String id){
+    public void deleteBook(@RequestParam(name = "id", defaultValue = "")  String id) {
         bookService.deleteBook(Long.valueOf(id));
     }
 }

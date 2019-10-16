@@ -5,6 +5,8 @@ import com.bibliotheque.usermicroservice.model.User;
 import com.bibliotheque.usermicroservice.service.UserService;
 import com.bibliotheque.usermicroservice.service.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,13 +23,17 @@ public class UserController {
     }
 
     @RequestMapping(value = "/api/user/getUser", method = RequestMethod.GET)
-    public  User getUser(@RequestParam(name = "id", defaultValue = "")  String id) {
-        return userService.getUser(Long.valueOf(id));
+    public  ResponseEntity<User> getUser(@RequestParam(name = "id", defaultValue = "")  String id) {
+        User user = userService.getUser(Long.valueOf(id));
+        if(user == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/api/user/addUser", method = RequestMethod.POST)
-    public  User createUser(@RequestBody UserDTO userDTO){
-        return userService.createUser(userDTO);
+    public  ResponseEntity<User> createUser(@RequestBody UserDTO userDTO){
+        User user = userService.createUser(userDTO);
+        if(user == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(user, HttpStatus.CREATED) ;
     }
 
     @RequestMapping(value = "/api/user/updateUser", method = RequestMethod.PUT)
