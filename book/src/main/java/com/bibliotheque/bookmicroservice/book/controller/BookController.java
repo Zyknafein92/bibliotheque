@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 
 @RestController
 public class BookController {
@@ -17,8 +19,9 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping(value = "/api/book/getAll")
-    public  List<Book> getBooks() {
-        return bookService.getBooks();
+    public  ResponseEntity<List<Book>> getBooks() {
+       List<Book> books =  bookService.getBooks();
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/api/book/getBook", method = RequestMethod.GET)
@@ -37,14 +40,17 @@ public class BookController {
         return new ResponseEntity<>(bookToCreate, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/api/book/updateBook", method = RequestMethod.PUT) // TODO: Vérifier avec Alexandre
+    @RequestMapping(value = "/api/book/updateBook", method = RequestMethod.PUT) //
     public ResponseEntity<Void> updateBook(@RequestBody BookDTO bookDTO){
+        //todo : si pas idée 404,
         bookService.updateBook(bookDTO);
         return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/api/book/deleteBook", method = RequestMethod.DELETE)
-    public void deleteBook(@RequestParam(name = "id", defaultValue = "")  String id) {
+    public ResponseEntity<Long> deleteBook(@RequestParam(name = "id", defaultValue = "")  String id) {
         bookService.deleteBook(Long.valueOf(id));
+        //todo : renvoi erreur 404 si pas trouver id.
+        return ResponseEntity.ok(Long.valueOf(id));
     }
 }

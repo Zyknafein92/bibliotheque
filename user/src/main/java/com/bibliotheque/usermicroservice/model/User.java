@@ -29,6 +29,8 @@ public class User {
     @Column(name="phone")
     private String phone;
 
+
+    // todo : ajouter unique
     @Column(name="email")
     private String email;
 

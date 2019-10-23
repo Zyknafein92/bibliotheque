@@ -6,6 +6,9 @@ import com.bibliotheque.usermicroservice.service.dto.UserDTO;
 import java.util.List;
 
 public interface UserService {
+
+    //todo : méthode pour retrouver utilisateur par email.
+
     List<User> getUsers();
 
     User getUser(Long id);

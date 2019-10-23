@@ -37,12 +37,14 @@ public class LibraryController {
     }
 
     @RequestMapping(value ="/api/library/updateLibrary", method = RequestMethod.PUT)
-    public void updateLibrary(@RequestBody LibraryDTO libraryDTO){
+    public ResponseEntity<Void> updateLibrary(@RequestBody LibraryDTO libraryDTO){
         libraryService.updateLibrary(libraryDTO);
+        return ResponseEntity.ok().build();
     }
 
     @RequestMapping(value = "/api/library/deleteLibrary", method = RequestMethod.DELETE)
-    public void deleteLibrary(@RequestParam(name = "id", defaultValue = "")  String id){
+    public ResponseEntity<Void> deleteLibrary(@RequestParam(name = "id", defaultValue = "")  String id){
         libraryService.deleteLibrary(Long.valueOf(id));
+        return ResponseEntity.ok().build();
     }
 }

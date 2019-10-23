@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserDTO userDTO) {
-
+        //todo : vérifier que l'email n'existe pas dans bdd
         if( userDTO.getFirstName() == null ) {
             throw new UserCreationException("Veuillez à renseigner un prénom ");
         }

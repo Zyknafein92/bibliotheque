@@ -37,13 +37,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/api/user/updateUser", method = RequestMethod.PUT)
-    public void updateUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<Void> updateUser(@RequestBody UserDTO userDTO){
         userService.updateUser(userDTO);
+        return ResponseEntity.ok().build();
     }
 
 
     @RequestMapping(value = "/api/user/deleteUser", method = RequestMethod.DELETE)
-    public void deleteUser(@RequestParam(name = "id", defaultValue = "")  String id) {
+    public ResponseEntity<Void> deleteUser(@RequestParam(name = "id", defaultValue = "")  String id) {
         userService.deleteUser(Long.valueOf(id));
+        return ResponseEntity.ok().build();
     }
 }
