@@ -1,7 +1,12 @@
 package com.bibliotheque.borrowmicroservice.borrow.controller;
 
+import com.bibliotheque.borrowmicroservice.borrow.model.Book;
 import com.bibliotheque.borrowmicroservice.borrow.model.Borrow;
+import com.bibliotheque.borrowmicroservice.borrow.model.User;
 import com.bibliotheque.borrowmicroservice.borrow.service.BorrowService;
+import com.bibliotheque.borrowmicroservice.borrow.service.dto.BorrowDTO;
+import com.bibliotheque.borrowmicroservice.borrow.service.proxy.BookMicroServiceProxy;
+import com.bibliotheque.borrowmicroservice.borrow.service.proxy.UserMicroServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +17,11 @@ public class BorrowController {
 
     @Autowired
     private BorrowService borrowService;
+    @Autowired
+    BookMicroServiceProxy bookMicroServiceProxy;
+    @Autowired
+    UserMicroServiceProxy userMicroServiceProxy;
+
 
     @GetMapping(value = "/api/borrow/getAll")
     public List<Borrow> findBorrowById(@PathVariable Long id) {
@@ -24,8 +34,12 @@ public class BorrowController {
     }
 
     @PostMapping(value="/api/borrow/addBorrow")
-    public Borrow createBorrow(@RequestBody Borrow borrow) {
-        return borrowService.createBorrow(borrow);
+    public Borrow createBorrow(@RequestBody BorrowDTO borrowDTO, User user, Book book) {
+
+        user = userMicroServiceProxy.getUser(user.getId());
+        book = bookMicroServiceProxy.getBook(book.getId());
+
+        return borrowService.createBorrow(borrowDTO, user, book);
     }
 
     @PutMapping(value="/api/borrow/extendBorrow")
@@ -34,8 +48,8 @@ public class BorrowController {
     }
 
     @PutMapping(value="/api/borrow/updateBorrow")
-    public void updateBorrow(@RequestBody Borrow borrow) {
-        borrowService.updateBorrow(borrow);
+    public void updateBorrow(@RequestBody BorrowDTO borrowDTO) {
+        borrowService.updateBorrow(borrowDTO);
     }
 
     @DeleteMapping(value="/api/borrow/deleteBorrow")

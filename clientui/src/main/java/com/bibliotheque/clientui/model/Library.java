@@ -6,8 +6,6 @@ import lombok.Setter;
 
 
 @Data
-@Getter
-@Setter
 public class Library {
 
     private Long id;
