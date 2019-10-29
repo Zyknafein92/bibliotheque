@@ -18,19 +18,20 @@ public class UserController {
     private UserService userService;
 
     @GetMapping(value = "/api/user/getAll")
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = userService.getUsers();
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/user/getUser", method = RequestMethod.GET)
-    public  ResponseEntity<User> getUser(@RequestParam(name = "id", defaultValue = "")  String id) {
+    public ResponseEntity<User> getUser(@RequestParam(name = "id", defaultValue = "")  String id) {
         User user = userService.getUser(Long.valueOf(id));
         if(user == null) return ResponseEntity.noContent().build();
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }
 
     @RequestMapping(value = "/api/user/addUser", method = RequestMethod.POST)
-    public  ResponseEntity<User> createUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<User> createUser(@RequestBody UserDTO userDTO){
         User user = userService.createUser(userDTO);
         if(user == null) return ResponseEntity.noContent().build();
         return new ResponseEntity<>(user, HttpStatus.CREATED) ;
@@ -39,13 +40,15 @@ public class UserController {
     @RequestMapping(value = "/api/user/updateUser", method = RequestMethod.PUT)
     public ResponseEntity<Void> updateUser(@RequestBody UserDTO userDTO){
         userService.updateUser(userDTO);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 
     @RequestMapping(value = "/api/user/deleteUser", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteUser(@RequestParam(name = "id", defaultValue = "")  String id) {
-        userService.deleteUser(Long.valueOf(id));
-        return ResponseEntity.ok().build();
+        User user = userService.getUser(Long.valueOf(id));
+        if(user == null) return ResponseEntity.noContent().build();
+        userService.deleteUser(user.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

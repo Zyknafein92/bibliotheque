@@ -8,6 +8,8 @@ import com.bibliotheque.borrowmicroservice.borrow.service.dto.BorrowDTO;
 import com.bibliotheque.borrowmicroservice.borrow.service.proxy.BookMicroServiceProxy;
 import com.bibliotheque.borrowmicroservice.borrow.service.proxy.UserMicroServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,31 +31,38 @@ public class BorrowController {
     }
 
     @GetMapping(value = "/api/borrow/getBorrow")
-    public Borrow getBorrow(@PathVariable Long id) {
-        return borrowService.getBorrow(id);
+    public ResponseEntity<Borrow> getBorrow(@RequestParam(name = "id", defaultValue = "")  String id) {
+        Borrow borrow = borrowService.getBorrow(Long.valueOf(id));
+        if(borrow == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(borrow, HttpStatus.OK);
     }
 
     @PostMapping(value="/api/borrow/addBorrow")
-    public Borrow createBorrow(@RequestBody BorrowDTO borrowDTO, User user, Book book) {
-
+    public ResponseEntity<Borrow> createBorrow(@RequestBody BorrowDTO borrowDTO, User user, Book book) {
         user = userMicroServiceProxy.getUser(user.getId());
         book = bookMicroServiceProxy.getBook(book.getId());
-
-        return borrowService.createBorrow(borrowDTO, user, book);
+        Borrow borrow = borrowService.createBorrow(borrowDTO, user, book);
+        return new ResponseEntity<>(borrow,HttpStatus.OK);
     }
 
     @PutMapping(value="/api/borrow/extendBorrow")
-    public Borrow extendBorrow(@PathVariable Long id) {
-        return borrowService.extendBorrow(id);
+    public ResponseEntity<Borrow> extendBorrow(@RequestParam(name = "id", defaultValue = "")  String id) {
+        Borrow borrow = borrowService.extendBorrow(Long.valueOf(id));
+        if(borrow == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(borrow, HttpStatus.OK);
     }
 
     @PutMapping(value="/api/borrow/updateBorrow")
-    public void updateBorrow(@RequestBody BorrowDTO borrowDTO) {
+    public ResponseEntity<Void> updateBorrow(@RequestBody BorrowDTO borrowDTO) {
         borrowService.updateBorrow(borrowDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value="/api/borrow/deleteBorrow")
-    public void deleteBorrow(@PathVariable Long id) {
-        borrowService.deleteBorrow(id);
+    public ResponseEntity<Void> deleteBorrow(@RequestParam(name = "id", defaultValue = "")  String id) {
+        Borrow borrow = borrowService.getBorrow(Long.valueOf(id));
+        if(borrow == null) return ResponseEntity.noContent().build();
+        borrowService.deleteBorrow(borrow.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -7,6 +7,7 @@ import com.bibliotheque.borrowmicroservice.borrow.model.Borrow;
 import com.bibliotheque.borrowmicroservice.borrow.model.User;
 import com.bibliotheque.borrowmicroservice.borrow.repository.BorrowRepository;
 import com.bibliotheque.borrowmicroservice.borrow.service.dto.BorrowDTO;
+import com.bibliotheque.borrowmicroservice.borrow.service.mapper.BorrowMapper;
 import com.bibliotheque.borrowmicroservice.borrow.service.tools.TimeTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,10 @@ public class BorrowServiceImpl implements BorrowService {
     @Autowired
     BorrowRepository borrowRepository;
     @Autowired
+    BorrowMapper borrowMapper;
+    @Autowired
     TimeTools timeTools;
+
 
 
     @Override
@@ -65,19 +69,16 @@ public class BorrowServiceImpl implements BorrowService {
         if(borrowDTO.getDateExtend() == null) throw new BorrowCreationException("La date d'extension du prêt ne peut pas être null");
 
         borrowDTO.setIsExtend(false);
-        //todo borrow mapper
+        Borrow borrow = borrowMapper.borrowDtoToBorrow(borrowDTO);
         return borrowRepository.save(borrow);
     }
 
     @Override
     public Borrow extendBorrow(Long id) {
         Borrow borrow = getBorrow(id);
-
         if(borrow == null) throw new BorrowNotFoundException("Erreur lors de la mise à jour : le prêt n'existe pas ou n'a pas été retrouvé");
-
         if(borrow.getIsExtend()) throw new BorrowCreationException("Le prêt a déjà été étendu");
         borrow.setIsExtend(true);
-        //todo borrow mapper
         return borrowRepository.save(borrow);
     }
 
@@ -85,7 +86,7 @@ public class BorrowServiceImpl implements BorrowService {
     public void updateBorrow(BorrowDTO borrowDTO) {
         Borrow borrow = getBorrow(borrowDTO.getId());
         if(borrow == null) throw new BorrowNotFoundException("L'emprunt recherché n'a pas été trouvé");
-        //todo : borrow mappeur
+        borrowMapper.updateBorrowFromBorrowDTO(borrowDTO,borrow);
         borrowRepository.save(borrow);
     }
 

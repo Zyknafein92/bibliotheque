@@ -18,15 +18,17 @@ public class LibraryController {
 
 
     @GetMapping(value = "/api/library/getAll")
-    public List<Library> getLibrarys() {
-        return libraryService.getLibrarys();
+    public ResponseEntity<List<Library>> getLibrarys() {
+        List<Library> libraries = libraryService.getLibrarys();
+        if(libraries == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(libraries, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/library/getLibrary", method = RequestMethod.GET)
     public  ResponseEntity<Library> getLibrary(@RequestParam(name = "id", defaultValue = "")  String id){
         Library library = libraryService.getLibrary(Long.valueOf(id));
         if(library == null) return ResponseEntity.noContent().build();
-        return new ResponseEntity<>(library, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(library, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/library/addLibrary", method = RequestMethod.POST)
@@ -39,12 +41,14 @@ public class LibraryController {
     @RequestMapping(value ="/api/library/updateLibrary", method = RequestMethod.PUT)
     public ResponseEntity<Void> updateLibrary(@RequestBody LibraryDTO libraryDTO){
         libraryService.updateLibrary(libraryDTO);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/library/deleteLibrary", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteLibrary(@RequestParam(name = "id", defaultValue = "")  String id){
-        libraryService.deleteLibrary(Long.valueOf(id));
-        return ResponseEntity.ok().build();
+        Library library = libraryService.getLibrary(Long.valueOf(id));
+        if(library == null) return ResponseEntity.noContent().build();
+        libraryService.deleteLibrary(library.getId());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

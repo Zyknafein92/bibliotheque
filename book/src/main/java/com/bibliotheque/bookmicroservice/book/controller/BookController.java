@@ -21,14 +21,14 @@ public class BookController {
     public  ResponseEntity<List<Book>> getBooks() {
        List<Book> books =  bookService.getBooks();
         if(books == null) return ResponseEntity.noContent().build();
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(books, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/book/getBook", method = RequestMethod.GET)
     public ResponseEntity<Book> getBook(@RequestParam(name = "id", defaultValue = "")  String id){
         Book book = bookService.getBook(Long.valueOf(id));
         if(book == null) return ResponseEntity.noContent().build();
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(book, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/book/addBook", method = RequestMethod.POST)
@@ -41,14 +41,14 @@ public class BookController {
     @RequestMapping(value = "/api/book/updateBook", method = RequestMethod.PUT)
     public ResponseEntity<Void> updateBook(@RequestBody BookDTO bookDTO){
         bookService.updateBook(bookDTO);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/api/book/deleteBook", method = RequestMethod.DELETE)
-    public ResponseEntity<Long> deleteBook(@RequestParam(name = "id", defaultValue = "")  String id) {
+    public ResponseEntity<Void> deleteBook(@RequestParam(name = "id", defaultValue = "")  String id) {
         Book book = bookService.getBook(Long.valueOf(id));
         if(book == null) return ResponseEntity.noContent().build();
         bookService.deleteBook(book.getId());
-        return ResponseEntity.ok(Long.valueOf(id));
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
