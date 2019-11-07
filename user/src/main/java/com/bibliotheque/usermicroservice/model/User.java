@@ -1,6 +1,7 @@
 package com.bibliotheque.usermicroservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.lang.Nullable;

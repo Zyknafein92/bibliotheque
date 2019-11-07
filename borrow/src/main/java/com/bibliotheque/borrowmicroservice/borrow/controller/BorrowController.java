@@ -1,12 +1,8 @@
 package com.bibliotheque.borrowmicroservice.borrow.controller;
 
-import com.bibliotheque.borrowmicroservice.borrow.model.Book;
 import com.bibliotheque.borrowmicroservice.borrow.model.Borrow;
-import com.bibliotheque.borrowmicroservice.borrow.model.User;
 import com.bibliotheque.borrowmicroservice.borrow.service.BorrowService;
 import com.bibliotheque.borrowmicroservice.borrow.service.dto.BorrowDTO;
-import com.bibliotheque.borrowmicroservice.borrow.service.proxy.BookMicroServiceProxy;
-import com.bibliotheque.borrowmicroservice.borrow.service.proxy.UserMicroServiceProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +15,6 @@ public class BorrowController {
 
     @Autowired
     private BorrowService borrowService;
-    @Autowired
-    BookMicroServiceProxy bookMicroServiceProxy;
-    @Autowired
-    UserMicroServiceProxy userMicroServiceProxy;
 
 
     @GetMapping(value = "/api/borrow/getAll")
@@ -38,10 +30,8 @@ public class BorrowController {
     }
 
     @PostMapping(value="/api/borrow/addBorrow")
-    public ResponseEntity<Borrow> createBorrow(@RequestBody BorrowDTO borrowDTO, User user, Book book) {
-        user = userMicroServiceProxy.getUser(user.getId());
-        book = bookMicroServiceProxy.getBook(book.getId());
-        Borrow borrow = borrowService.createBorrow(borrowDTO, user, book);
+    public ResponseEntity<Borrow> createBorrow(@RequestBody BorrowDTO borrowDTO) {
+        Borrow borrow = borrowService.createBorrow(borrowDTO);
         return new ResponseEntity<>(borrow,HttpStatus.OK);
     }
 

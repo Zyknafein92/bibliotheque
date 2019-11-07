@@ -1,5 +1,7 @@
 package com.bibliotheque.libarymicroservice.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name= "library", schema="public")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Library {
 
     @Id

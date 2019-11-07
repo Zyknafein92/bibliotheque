@@ -29,38 +29,38 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book getBook(Long id) {
         Book book = bookRepository.getOne(id);
-        if(book == null) throw new BookNotFoundException("Le livre recherché n'a pas été trouvé");
+        if (book == null) throw new BookNotFoundException("Le livre recherché n'a pas été trouvé");
         return book;
     }
 
     @Override
     public Book createBook(BookDTO bookDTO) {
 
-        if(bookDTO.getLibraryID() == null) {
+        if (bookDTO.getLibraryID() == null) {
             throw new BookCreationException("Veuillez renseigner l'ID de la librairie");
         }
 
-        if(bookDTO.getAvaible() == null) {
+        if (bookDTO.getAvaible() == null) {
             throw new BookCreationException("Veuillez renseigner la disponibilité du livre");
         }
 
-        if(bookDTO.getAuthor() == null) {
+        if (bookDTO.getAuthor() == null) {
             throw new BookCreationException("Veuillez ajouter un nom d'auteur");
         }
 
-        if(bookDTO.getDescription() == null) {
+        if (bookDTO.getDescription() == null) {
             throw new BookCreationException("Veuillez ajouter une description à l'ouvrage");
         }
 
-        if(bookDTO.getGender() == null) {
+        if (bookDTO.getGender() == null) {
             throw new BookCreationException("Veuillez ajouter un genre à l'ouvrage");
         }
 
-        if(bookDTO.getPicture() == null) {
+        if (bookDTO.getPicture() == null) {
             throw new BookCreationException("Veuillez ajouter une photo de la couverture de l'ouvrage");
         }
 
-        if(bookDTO.getTitle() == null) {
+        if (bookDTO.getTitle() == null) {
             throw new BookCreationException("Veuillez renseigner le titre de l'ouvrage");
         }
 
@@ -72,8 +72,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public void updateBook(BookDTO bookDTO) {
         Book book = getBook(bookDTO.getId());
-        if(book == null) throw new BookNotFoundException("Le livre recherché n'a pas été trouvé");
-        bookMapper.updateBookFromBookDTO(bookDTO,book);
+        if (book == null) throw new BookNotFoundException("Le livre recherché n'a pas été trouvé");
+        bookMapper.updateBookFromBookDTO(bookDTO, book);
         bookRepository.save(book);
     }
 

@@ -2,17 +2,14 @@ package com.bibliotheque.borrowmicroservice.borrow.service;
 
 import com.bibliotheque.borrowmicroservice.borrow.exceptions.BorrowCreationException;
 import com.bibliotheque.borrowmicroservice.borrow.exceptions.BorrowNotFoundException;
-import com.bibliotheque.borrowmicroservice.borrow.model.Book;
 import com.bibliotheque.borrowmicroservice.borrow.model.Borrow;
-import com.bibliotheque.borrowmicroservice.borrow.model.User;
 import com.bibliotheque.borrowmicroservice.borrow.repository.BorrowRepository;
 import com.bibliotheque.borrowmicroservice.borrow.service.dto.BorrowDTO;
 import com.bibliotheque.borrowmicroservice.borrow.service.mapper.BorrowMapper;
-import com.bibliotheque.borrowmicroservice.borrow.service.tools.TimeTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -23,8 +20,7 @@ public class BorrowServiceImpl implements BorrowService {
     BorrowRepository borrowRepository;
     @Autowired
     BorrowMapper borrowMapper;
-    @Autowired
-    TimeTools timeTools;
+
 
 
 
@@ -43,28 +39,15 @@ public class BorrowServiceImpl implements BorrowService {
 
 
     @Override
-    public Borrow createBorrow(BorrowDTO borrowDTO, User user, Book book) {
+    public Borrow createBorrow(BorrowDTO borrowDTO) {
 
-        borrowDTO.setBookID(book.getId());
-        borrowDTO.setUserID(user.getId());
-        borrowDTO.setDateStart(new Date());
+          borrowDTO.setDateStart(LocalDateTime.now());
+          borrowDTO.setDateEnd(LocalDateTime.now().plusDays(28));
+          borrowDTO.setDateExtend(LocalDateTime.now().plusDays(56));
 
         if(borrowDTO.getUserID() == null) throw new BorrowCreationException("L'id de l'utilisateur doit être renseigné");
         if(borrowDTO.getBookID() == null) throw new BorrowCreationException("L'id de livre doit être renseigné");
         if(borrowDTO.getDateStart() == null) throw new BorrowCreationException("La date de l'emprunt doit être renseignée");
-
-        try {
-            Date end = TimeTools.addDays(borrowDTO.getDateStart(), 28);
-            borrowDTO.setDateEnd(end);
-
-            Date extend = TimeTools.addDays(borrowDTO.getDateEnd(), 28);
-            borrowDTO.setDateExtend(extend);
-
-        } catch (ParseException e) {
-            e.printStackTrace();
-            throw new BorrowCreationException("Erreur lors de la création des dates");
-        }
-
         if(borrowDTO.getDateEnd() == null) throw new BorrowCreationException("La date de fin de prêt ne peut pas être null");
         if(borrowDTO.getDateExtend() == null) throw new BorrowCreationException("La date d'extension du prêt ne peut pas être null");
 
@@ -92,7 +75,6 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public void deleteBorrow(Long id) {
-        // TODO: 29/10/2019 : Call book et le rendre disponible. 
         borrowRepository.deleteById(id);
     }
 }

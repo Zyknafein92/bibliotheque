@@ -1,10 +1,13 @@
 package com.bibliotheque.borrowmicroservice.borrow.model;
 
+import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
+
 
 @Entity
 @Getter
@@ -24,13 +27,13 @@ public class Borrow {
     private String bookID;
 
     @Column(name="date_start_borrow")
-    private Date dateStart;
+    private LocalDateTime dateStart;
 
     @Column(name="date_end")
-    private Date dateEnd;
+    private LocalDateTime dateEnd;
 
     @Column(name="date_extend")
-    private Date dateExtend;
+    private LocalDateTime dateExtend;
 
     @Column(name="is_extend")
     private Boolean isExtend;

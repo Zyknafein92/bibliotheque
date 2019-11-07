@@ -13,7 +13,7 @@ public interface BorrowService {
 
     Borrow getBorrow(Long id);
 
-    Borrow createBorrow(BorrowDTO borrowDTO, User user, Book book);
+    Borrow createBorrow(BorrowDTO borrowDTO);
 
     Borrow extendBorrow(Long id);
 

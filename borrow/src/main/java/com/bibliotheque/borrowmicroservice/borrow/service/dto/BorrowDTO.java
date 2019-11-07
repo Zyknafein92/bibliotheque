@@ -4,7 +4,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 @Data
 @Getter
@@ -14,9 +15,9 @@ public class BorrowDTO {
     private Long id;
     private String userID;
     private String bookID;
-    private Date dateStart;
-    private Date dateEnd;
-    private Date dateExtend;
+    private LocalDateTime dateStart;
+    private LocalDateTime dateEnd;
+    private LocalDateTime dateExtend;
     private Boolean isExtend;
 
 }

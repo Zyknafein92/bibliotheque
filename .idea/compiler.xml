@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="clientui" />
+        <module name="front" />
       </profile>
       <profile name="Annotation profile for library" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -38,6 +38,8 @@
       <module name="book" target="1.8" />
       <module name="borrow" target="1.8" />
       <module name="clientui" target="1.8" />
+      <module name="front" target="1.8" />
+      <module name="front (1)" target="1.8" />
       <module name="library" target="1.8" />
       <module name="user" target="1.8" />
     </bytecodeTargetLevel>
@@ -47,6 +49,8 @@
       <module name="book" options="-parameters" />
       <module name="borrow" options="-parameters" />
       <module name="clientui" options="-parameters" />
+      <module name="front" options="-parameters" />
+      <module name="front (1)" options="-parameters" />
       <module name="library" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>
