@@ -12,7 +12,6 @@ import java.util.List;
 
 @RestController
 public class LibraryController {
-// todo : vérif sur les caractères ect... traitement erreur.
     @Autowired
     private LibraryService libraryService;
 
