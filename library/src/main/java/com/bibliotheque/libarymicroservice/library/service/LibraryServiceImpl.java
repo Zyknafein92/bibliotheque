@@ -40,7 +40,7 @@ public class LibraryServiceImpl implements LibraryService {
             throw new LibraryCreationException("Veillez définir un nom pour la bibliothèque");
         }
         if(libraryDTO.getAddress() == null) {
-            throw new LibraryCreationException("Veillez définir une addresse pour la bibliothèque");
+            throw new LibraryCreationException("Veillez définir une adresse pour la bibliothèque");
         }
         if(libraryDTO.getPhone() == null) {
             throw new LibraryCreationException("Veillez définir un numéro de téléphone pour la bibliothèque");

@@ -40,6 +40,7 @@
       <module name="clientui" target="1.8" />
       <module name="front" target="1.8" />
       <module name="front (1)" target="1.8" />
+      <module name="gateway" target="1.8" />
       <module name="library" target="1.8" />
       <module name="user" target="1.8" />
     </bytecodeTargetLevel>
@@ -51,6 +52,7 @@
       <module name="clientui" options="-parameters" />
       <module name="front" options="-parameters" />
       <module name="front (1)" options="-parameters" />
+      <module name="gateway" options="-parameters" />
       <module name="library" options="-parameters" />
       <module name="user" options="-parameters" />
     </option>
