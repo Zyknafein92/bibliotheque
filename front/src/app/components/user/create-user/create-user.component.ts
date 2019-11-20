@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {User} from '../../../../models/user';
 import {UserService} from '../../../../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-user',
@@ -13,7 +14,7 @@ export class CreateUserComponent implements OnInit {
   user: User;
   private messageError: string;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     this.initform();

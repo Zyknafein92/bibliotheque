@@ -23,11 +23,8 @@ public class Library {
     @Column(name ="name")
     private String name;
 
-    @Column(name ="adress")
-    private String adress;
-
-    @Column(name ="postalCode")
-    private String postalCode;
+    @Column(name ="address")
+    private String address;
 
     @Column(name ="phone")
     private String phone;
@@ -35,10 +32,9 @@ public class Library {
     public Library() {
     }
 
-    public Library(String name, String adress, String postalCode, String phone) {
+    public Library(String name, String address, String phone) {
         this.name = name;
-        this.adress = adress;
-        this.postalCode = postalCode;
+        this.address = address;
         this.phone = phone;
     }
 

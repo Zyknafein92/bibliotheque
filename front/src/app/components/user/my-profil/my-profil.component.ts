@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {UserService} from '../../../../services/user.service';
 import {User} from '../../../../models/user';
 
@@ -23,6 +23,20 @@ export class MyProfilComponent implements OnInit {
    // this.initForm(); // (this.token);
   }
 
+  // refreshUser() {
+  //   this.initProfil(this.token);
+  // }
+  //
+  // deleteUser(user: User) {
+  //   this.userService.deleteUser(this.user.id).subscribe(
+  //     response => {
+  //       this.token.signOut();
+  //       this.router.navigateByUrl("/");
+  //     }),
+  //     err => {
+  //       console.log("error: ", err.error.message);
+  //     };
+  // }
 }
 
 

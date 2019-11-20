@@ -1,10 +1,8 @@
 package com.bibliotheque.usermicroservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import io.swagger.annotations.ApiModel;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 
@@ -38,21 +36,21 @@ public class User {
     @Column(name="password")
     private String password;
 
-    @Column(name="adress")
-    private String adress;
+    @Column(name="address")
+    private String address;
 
     @Column(name="postalCode")
     private String postalCode;
 
     public User() { }
 
-    public User( String firstName, String lastName, String phone, String email, String password, String adress, String postalCode) {
+    public User(String firstName, String lastName, String phone, String email, String password, String address, String postalCode) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
         this.password = password;
-        this.adress = adress;
+        this.address = address;
         this.postalCode = postalCode;
     }
 }

@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
             throw new UserCreationException(" Veuillez à renseigner un mot de passe");
         }
 
-        if( userDTO.getAdress() == null ) {
+        if( userDTO.getAddress() == null ) {
             throw new UserCreationException("Veuillez à renseigner une adresse");
         }
 

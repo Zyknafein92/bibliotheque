@@ -12,8 +12,7 @@ public class LibraryDTO {
 
     private Long id;
     private String name;
-    private String adress;
-    private String postalCode;
+    private String address;
     private String phone;
 
 }
