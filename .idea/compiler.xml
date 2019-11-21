@@ -7,6 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="front" />
+        <module name="gateway" />
+        <module name="eureka" />
       </profile>
       <profile name="Annotation profile for library" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -38,6 +40,7 @@
       <module name="book" target="1.8" />
       <module name="borrow" target="1.8" />
       <module name="clientui" target="1.8" />
+      <module name="eureka" target="1.8" />
       <module name="front" target="1.8" />
       <module name="front (1)" target="1.8" />
       <module name="gateway" target="1.8" />
@@ -50,6 +53,7 @@
       <module name="book" options="-parameters" />
       <module name="borrow" options="-parameters" />
       <module name="clientui" options="-parameters" />
+      <module name="eureka" options="-parameters" />
       <module name="front" options="-parameters" />
       <module name="front (1)" options="-parameters" />
       <module name="gateway" options="-parameters" />

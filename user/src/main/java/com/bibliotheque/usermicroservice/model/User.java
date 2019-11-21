@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -18,23 +19,21 @@ public class User {
     @Column(name ="user_id")
     private Long id;
 
-
     @Column(name="firstName")
     private String firstName;
 
     @Column(name="lastName")
     private String lastName;
 
+    @Column(name="birthday")
+    private Date birthday;
+
     @Column(name="phone")
     private String phone;
-
 
     // todo : ajouter unique
     @Column(name="email")
     private String email;
-
-    @Column(name="password")
-    private String password;
 
     @Column(name="address")
     private String address;
@@ -42,15 +41,10 @@ public class User {
     @Column(name="postalCode")
     private String postalCode;
 
+    @Column(name="city")
+    private String city;
+
     public User() { }
 
-    public User(String firstName, String lastName, String phone, String email, String password, String address, String postalCode) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.phone = phone;
-        this.email = email;
-        this.password = password;
-        this.address = address;
-        this.postalCode = postalCode;
-    }
+
 }

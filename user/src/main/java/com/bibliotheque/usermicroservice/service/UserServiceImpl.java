@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserDTO userDTO) {
-        //todo : vérifier que l'email n'existe pas dans bdd
+        //todo : vérifier que l'email n'existe pas dans bdd ++++ ajouter les nouveaux paramètres.
         if( userDTO.getFirstName() == null ) {
             throw new UserCreationException("Veuillez à renseigner un prénom ");
         }
@@ -51,10 +51,6 @@ public class UserServiceImpl implements UserService {
             throw new UserCreationException(" Veuillez à renseigner un email");
         }
 
-        if( userDTO.getPassword() == null ) {
-            throw new UserCreationException(" Veuillez à renseigner un mot de passe");
-        }
-
         if( userDTO.getAddress() == null ) {
             throw new UserCreationException("Veuillez à renseigner une adresse");
         }
@@ -69,7 +65,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateUser(UserDTO userDTO) {
-
         User user = userRepository.getOne(userDTO.getId());
         if(user == null) throw new UserNotFoundException(" L'utilisateur n'existe pas");
         userMapper.updateUserFromUserDTO(userDTO, user);

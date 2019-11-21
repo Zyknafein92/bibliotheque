@@ -7,6 +7,8 @@ export interface User {
   email?: string;
   password?: string;
   address?: string;
+  postalCode?: string;
+  city?: string;
 }
 
 
