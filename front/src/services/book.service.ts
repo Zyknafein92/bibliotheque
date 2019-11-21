@@ -10,7 +10,7 @@ import {Book} from '../models/book';
 
 export class BookService {
 
-  private bookURL = 'http://localhost:9010/api/book/';
+  private bookURL = 'http://localhost:9000/api/book/';
 
   constructor(private http: HttpClient) {}
 

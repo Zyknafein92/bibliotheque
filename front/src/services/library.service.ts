@@ -10,7 +10,7 @@ import {Library} from '../models/library';
 })
 export class LibraryService {
 
-  private libraryURL = 'http://localhost:9030/api/library/';
+  private libraryURL = 'http://localhost:9000/api/library/';
 
   constructor(private http: HttpClient) { }
 
