@@ -18,6 +18,7 @@ import { ViewBookComponent } from './components/book/view-book/view-book.compone
 import { ViewLibrarysComponent } from './components/library/view-librarys/view-librarys.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
+import {httpInterceptorProviders} from '../services/security/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { LogoutComponent } from './components/auth/logout/logout.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

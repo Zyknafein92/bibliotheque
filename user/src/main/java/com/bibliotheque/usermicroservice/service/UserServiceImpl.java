@@ -43,6 +43,10 @@ public class UserServiceImpl implements UserService {
             throw new UserCreationException(" Veuillez à renseigner un nom");
         }
 
+        if( userDTO.getBirthday() == null ) {
+            throw new UserCreationException(" Veuillez à renseigner une date de naissance");
+        }
+
         if( userDTO.getPhone() == null ) {
             throw new UserCreationException(" Veuillez à renseigner un numéro de téléphone");
         }
@@ -57,6 +61,10 @@ public class UserServiceImpl implements UserService {
 
         if( userDTO.getPostalCode() == null ) {
             throw new UserCreationException("Veuillez à renseigner un numéro de code postal");
+        }
+
+        if( userDTO.getCity() == null ) {
+            throw new UserCreationException(" Veuillez à renseigner une ville");
         }
 
         User user = userMapper.userDtoToUser(userDTO);

@@ -9,7 +9,7 @@ import {User} from '../models/user';
 })
 export class UserService {
 
-  private userURL = 'http://localhost:9000/api/user/';
+  private userURL = 'http://localhost:9000/api/user';
 
   constructor(private http: HttpClient) { }
 
@@ -25,7 +25,7 @@ export class UserService {
   }
 
   saveUser(form: FormGroup): Observable<FormGroup> {
-    return this.http.post<FormGroup>(this.userURL, form.value);
+    return this.http.post<FormGroup>(this.userURL + '/addUser', form.value);
   }
 
   updateUser(form: FormGroup): Observable<User> {

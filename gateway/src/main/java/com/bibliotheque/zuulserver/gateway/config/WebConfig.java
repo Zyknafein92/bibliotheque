@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 public class WebConfig extends WebMvcConfigurerAdapter {
+
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry
@@ -17,6 +18,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 .allowedMethods("GET", "PUT", "POST", "DELETE")
                 .allowedHeaders("*");
     }
+
   @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
