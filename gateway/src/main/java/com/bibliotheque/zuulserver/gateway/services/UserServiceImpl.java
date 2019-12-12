@@ -10,6 +10,7 @@ import com.bibliotheque.zuulserver.gateway.repository.UserRepository;
 import com.bibliotheque.zuulserver.gateway.services.dto.UserDTO;
 import com.bibliotheque.zuulserver.gateway.services.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -26,6 +27,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder encoder;
 
     @Override
     public User getUser(Long id) {
@@ -46,12 +50,15 @@ public class UserServiceImpl implements UserService {
         }
 
         if( userDTO.getRoles() == null ) {
-            Set<Role> roles= new HashSet<>();
+            Set<Role> roles = new HashSet<>();
             Role roleUser = roleRepository.findByName(RoleName.ROLE_USER);
             roles.add(roleUser);
+            userDTO.setRoles(roles);
         }
 
         User user = userMapper.userDtoToUser(userDTO);
+        user.setPassword(encoder.encode(user.getPassword()));
+
         return userRepository.save(user);
     }
 

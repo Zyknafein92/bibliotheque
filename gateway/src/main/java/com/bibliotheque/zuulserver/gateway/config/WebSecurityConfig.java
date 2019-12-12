@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/localhost:5432/bibliotheque-security", "/localhost:5432/bibliotheque-user").permitAll();
         http.cors().and().csrf().disable().
                 authorizeRequests()
-                .antMatchers("/api/security/addUser","/api/user/addUser", "/api/user/login").permitAll()
+                .antMatchers("/api/security/addUser","/user-microservice/api/user/addUser", "/api/security/login").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
@@ -71,8 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         // Allow eureka client to be accessed without authentication
-        web.ignoring().antMatchers("/*/")//
-                .antMatchers("/eureka/**")//
+        web.ignoring().antMatchers("/*/")
+                .antMatchers("/eureka/**")
                 .antMatchers(HttpMethod.OPTIONS, "/**"); // Request type options should be allowed.
     }
 

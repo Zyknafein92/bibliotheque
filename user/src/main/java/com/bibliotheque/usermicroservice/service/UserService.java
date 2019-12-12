@@ -15,7 +15,11 @@ public interface UserService {
 
     User createUser(UserDTO userDTO);
 
+    User getMyProfil(String pseudo);
+
     void updateUser(UserDTO userDTO);
 
     void deleteUser(Long id);
+
+
 }

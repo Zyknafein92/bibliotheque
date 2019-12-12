@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {TokenStorageService} from '../../../services/security/token-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
-
+  info: any;
+  constructor(private token: TokenStorageService) { }
   ngOnInit() {
+    this.info = {
+      token: this.token.getToken(),
+      email: this.token.getEmail(),
+      authorities: this.token.getAuthorities()
+    };
   }
 
 }

@@ -19,6 +19,7 @@ import { ViewLibrarysComponent } from './components/library/view-librarys/view-l
 import { LoginComponent } from './components/auth/login/login.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
 import {httpInterceptorProviders} from '../services/security/auth-interceptor.service';
+import {TokenStorageService} from '../services/security/token-storage.service';
 
 @NgModule({
   declarations: [
@@ -50,4 +51,5 @@ import {httpInterceptorProviders} from '../services/security/auth-interceptor.se
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -18,15 +18,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping(value = "/api/user/getAll")
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-
+    // todo : vire /api et remplace /getUser
+    // users/{id} -->@PathVariable
     @RequestMapping(value = "/api/user/getUser", method = RequestMethod.GET)
     public ResponseEntity<User> getUser(@RequestParam(name = "id", defaultValue = "")  String id) {
         User user = userService.getUser(Long.valueOf(id));
+        if(user == null) return ResponseEntity.noContent().build();
+        return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping(value="/api/user/myProfil")
+    public ResponseEntity<User> getMyProfil(@RequestParam(name = "email", defaultValue = "") String email){
+        User user = userService.getMyProfil(email);
         if(user == null) return ResponseEntity.noContent().build();
         return new ResponseEntity<>(user, HttpStatus.ACCEPTED);
     }

@@ -1,7 +1,8 @@
-import { LoginInfo } from '../login-info';
+import { AuthLoginInfo } from '../login-info';
 
 describe('LoginInfo', () => {
   it('should create an instance', () => {
-    expect(new LoginInfo()).toBeTruthy();
+    // @ts-ignore
+    expect(new AuthLoginInfo()).toBeTruthy();
   });
 });

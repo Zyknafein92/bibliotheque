@@ -15,7 +15,7 @@ export class CreateUserComponent implements OnInit {
   user: User;
   private messageError: string;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService, private authService : AuthService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private userService: UserService, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.initform();
@@ -26,7 +26,9 @@ export class CreateUserComponent implements OnInit {
       {
         firstName: new FormControl(),
         lastName: new FormControl(),
-        birthDate: new FormControl(),
+        birthday: new FormControl(),
+        city: new FormControl(),
+        postalCode: new FormControl(),
         email: new FormControl('', Validators.compose([
           Validators.required,
           Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')

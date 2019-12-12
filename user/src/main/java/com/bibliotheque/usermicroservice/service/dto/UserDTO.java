@@ -4,7 +4,6 @@ package com.bibliotheque.usermicroservice.service.dto;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.Date;
 
 @Data
@@ -12,6 +11,9 @@ import java.util.Date;
 @Setter
 public class UserDTO {
 
+  //  @NotNull
+  // @Valid
+  // @Size(min=5, max=50, message = "First name should not have value outside 5-50")
     private Long id;
     private String firstName;
     private String lastName;

@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class AuthService {
 
-  private loginUrl = 'http://localhost:9000/login';
+  private loginUrl = 'http://localhost:9000/api/security/login';
   private addUser = 'http://localhost:9000/api/security/addUser';
 
   constructor(private http: HttpClient) {

@@ -1,8 +1,11 @@
 package com.bibliotheque.usermicroservice.model;
 
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -25,6 +28,7 @@ public class User {
     @Column(name="lastName")
     private String lastName;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name="birthday")
     private Date birthday;
 

@@ -72,6 +72,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getMyProfil(String email) {
+        User user = userRepository.findByEmail(email);
+        if(user == null) throw new UserNotFoundException(" L'utilisateur n'existe pas");
+       // userMapper.userToUserDTO(user);
+        return user;
+    }
+
+    @Override
     public void updateUser(UserDTO userDTO) {
         User user = userRepository.getOne(userDTO.getId());
         if(user == null) throw new UserNotFoundException(" L'utilisateur n'existe pas");

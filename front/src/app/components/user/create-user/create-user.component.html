@@ -46,14 +46,14 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group"
-                       [class.has-success]="forms.get('birthDate').valid"
-                       [class.has-error]="forms.get('birthDate').invalid && forms.get('birthDate').touched">
+                       [class.has-success]="forms.get('birthday').valid"
+                       [class.has-error]="forms.get('birthday').invalid && forms.get('birthday').touched">
                     <label class="control-label">Date de Naissance:</label>
                     <input class="form-control input-md"
                            type="Date"
                            name="Date de Naissance"
-                           placeholder="birthDate"
-                           formControlName="birthDate"
+                           placeholder="birthday"
+                           formControlName="birthday"
                            autocapitalize="on"
                            spellcheck="on"
                            required/>
@@ -77,7 +77,7 @@
               </div>
 
               <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-group"
                        [class.has-success]="forms.get('address').valid"
                        [class.has-error]="forms.get('address').invalid && forms.get('address').touched">
@@ -90,6 +90,39 @@
                            minlength="15"
                            required>
                   </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-7">
+                  <div class="form-group"
+                       [class.has-success]="forms.get('city').valid"
+                       [class.has-error]="forms.get('city').invalid && forms.get('city').touched">
+                    <label class="control-label">Entrez le nom de votre ville:</label>
+                    <input class="form-control input-md"
+                           type="city"
+                           name="city"
+                           placeholder="Entrez le nom de votre ville"
+                           formControlName="city"
+                           minlength="5"
+                           required>
+                  </div>
+                </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group"
+                         [class.has-success]="forms.get('postalCode').valid"
+                         [class.has-error]="forms.get('postalCode').invalid && forms.get('postalCode').touched">
+                      <label class="control-label">Entrez votre code postal:</label>
+                      <input class="form-control input-md"
+                             type="postalCode"
+                             name="postalCode"
+                             placeholder="Entrez le code postal de votre ville"
+                             formControlName="postalCode"
+                             minlength="5"
+                             maxlength="5"
+                             required>
+                    </div>
                 </div>
               </div>
 
